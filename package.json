@@ -1,0 +1,9 @@
+{
+  "name": "shoe-project",
+  "version": "1.0.0",
+  "description": "Full stack project for a shoe company",
+  "main": "index.js",
+  "repository": "https://github.com/aryaludianto/shoe_project.git",
+  "author": "arya <arya.pratamal@ymail.com>",
+  "license": "MIT"
+}
