@@ -19,9 +19,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// app.use(bodyParser.text({ type: 'text/html' }));
-// app.use(express.json());
-
 // Activity Logger
 app.use(loggerMiddleware);
 
