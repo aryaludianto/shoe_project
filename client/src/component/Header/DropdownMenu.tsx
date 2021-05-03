@@ -34,11 +34,10 @@ display: inline-block;
 `;
 
 
-
 const NavbarDropdownContent = styled.div<IDropDown>`
 display: none;
 position: absolute;
-right: 30px;
+right:60px;
 top:40px;
 background-color: #f9f9f9;
 min-width: 160px;
@@ -70,7 +69,7 @@ export enum MenuType {
 
 export interface Properties {
   title?: string
-  content?: ReactNode
+  content?: React.ReactNode
   height?: string
   width?: string
   menuType?: MenuType
@@ -92,12 +91,9 @@ const DropdownHeaderMenu: FC<Properties> = ({
   // return (<MenuContainer height={height} width={width} menuType={menuType}>
   // </MenuContainer>
   // )
-
   return (
     <NavbarDropdownContent onMouseEnter={() => setIsActiveOnTop(true)} onMouseLeave={() => setIsActiveOnTop(false)} isActiveOnTop={isActiveOnTop} isActive={isActive}>
-      <h1>test halo</h1>
-      <h1>test beol</h1>
-      <h1>test tai</h1>
+      {content}
     </NavbarDropdownContent>
   )
 }

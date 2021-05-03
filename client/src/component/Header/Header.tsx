@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios';
 import Loader from "react-loader-spinner";
 import DropdownHeaderMenu from './DropdownMenu'
+import { NavLink } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   height: 120px;
@@ -15,12 +16,11 @@ const HeaderContainer = styled.div`
 
 const BrandHeader = styled.div`
   height:40px;
-  width:99.8%;
+  width:100%;
   display:flex;
   flex-direction:row;
   background-color:blue;
   justify-content:flex-end;
-  padding-right:5px;
 `
 
 const BrandMenu = styled.div`
@@ -42,6 +42,7 @@ const HeaderItems = styled.div`
   display:flex;
   flex-direction:row;
   align-items:center;
+  margin-right:15px;
 `
 
 const HeaderItem = styled.div`
@@ -83,10 +84,12 @@ const Header: FC = () => {
   //   </TestisContainer>)
   // })
 
-  const helpDropDown = () => {
-
-  }
-
+  const helpMenu = (<>
+    <NavLink to="/second" >
+      <h1>bangsat menclok</h1>
+    </NavLink>
+    <h1>bangsat</h1>
+    <h1>bangsat</h1> </>);
 
   return (<HeaderContainer>
 
@@ -97,7 +100,8 @@ const Header: FC = () => {
         <HeaderItem>Sign In</HeaderItem>
       </HeaderItems>
     </BrandHeader>
-    <DropdownHeaderMenu isActive={isHelpDrop} />
+    <DropdownHeaderMenu isActive={isHelpDrop} content={helpMenu} />
+
 
 
     <BrandMenu>
