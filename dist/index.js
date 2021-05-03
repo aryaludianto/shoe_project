@@ -12,6 +12,7 @@ var index_1 = __importDefault(require("./routes/index"));
 var loggerMiddleWare_1 = __importDefault(require("./logger/loggerMiddleWare"));
 var port = config_1.default.port;
 var app = express_1.default();
+logger_1.default.info("this is the port from env : " + port);
 // Configure Express to use EJS
 app.set('views', path_1.default.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

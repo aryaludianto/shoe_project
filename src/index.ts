@@ -9,6 +9,8 @@ import loggerMiddleware from './logger/loggerMiddleWare';
 const port = config.port;
 const app = express();
 
+logger.info(`this is the port from env : ${port}`);
+
 // Configure Express to use EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
