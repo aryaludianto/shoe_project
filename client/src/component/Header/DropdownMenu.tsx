@@ -3,76 +3,55 @@ import styled from 'styled-components'
 import axios from 'axios';
 import Loader from "react-loader-spinner";
 
-// export interface IMenu {
-//   height: string
-//   width: string
-//   menuType: MenuType
-//   isHovered: boolean
-// }
-
-// const MenuContainer = styled.div<IMenu>`
-//   height: ${(p) => p.height};
-//   width: ${(p) => p.height};
-//   background-color:white;
-//   display: block;
-//   flex-direction:column;
-//   align-items:center;
-// `
-
 export interface IDropDown {
-  isActive: boolean
-  isActiveOnTop: boolean
+  isActive: Boolean
+  isActiveOnTop: Boolean
+  menuType?: String
 }
-
-const NavbarDropdown = styled.div`
-position: relative;
-display: inline-block;
-
-&:hover {
-  display: block;
-}
-`;
-
 
 const NavbarDropdownContent = styled.div<IDropDown>`
-display: none;
-position: absolute;
-right:60px;
-top:40px;
-background-color: #f9f9f9;
-min-width: 160px;
-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
-padding: 12px 16px;
-z-index: 1;
+  display: none;
+  position: absolute;
+  border-radius:10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
+  padding: 12px 16px;
+  z-index: 1;
 
-${(p) => (p.isActive || p.isActiveOnTop) && `
- display: block;
- >h1 {
-      display: block;
+  ${(p) => (p.menuType === 'small') && `
+    right:60px;
+    top:40px;
+    min-width: 160px;
+  `}
+
+  ${(p) => (p.menuType === 'big') && `
+    right:60px;
+    top:80px;
+    min-width: 100%;
+    height:80px;
+  `}
+
+  ${(p) => (p.isActive || p.isActiveOnTop) && `
+   display: block;
+   >h1 {
+        display: block;
+    }
+  `}
+
+  &::hover{
+    display: block;
+   >h1 {
+        display: block;
+    }
   }
-`}
-
-&::hover{
-  display: block;
- >h1 {
-      display: block;
-  }
-}
-
 `;
-
-
-export enum MenuType {
-  Small,
-  Large
-}
 
 export interface Properties {
   title?: string
   content?: React.ReactNode
   height?: string
   width?: string
-  menuType?: MenuType
+  menuType?: string
   isActive?: boolean
 }
 
@@ -81,18 +60,15 @@ const DropdownHeaderMenu: FC<Properties> = ({
   content,
   height = '200px',
   width = '150px',
-  menuType = MenuType.Small,
+  menuType = 'small',
   isActive = false }) => {
 
   const [isActiveOnTop, setIsActiveOnTop] = useState(false);
 
-
-
-  // return (<MenuContainer height={height} width={width} menuType={menuType}>
-  // </MenuContainer>
-  // )
   return (
-    <NavbarDropdownContent onMouseEnter={() => setIsActiveOnTop(true)} onMouseLeave={() => setIsActiveOnTop(false)} isActiveOnTop={isActiveOnTop} isActive={isActive}>
+    <NavbarDropdownContent onMouseEnter={() => setIsActiveOnTop(true)}
+      onMouseLeave={() => setIsActiveOnTop(false)} isActiveOnTop={isActiveOnTop}
+      isActive={isActive} menuType={menuType}>
       {content}
     </NavbarDropdownContent>
   )

@@ -14,35 +14,26 @@ const HeaderContainer = styled.div`
   align-items:center;
 `
 
-const BrandHeader = styled.div`
+interface IHeaderMenu {
+  backGroundColor?: string
+  justifyContent?: string
+}
+
+const BrandHeader = styled.div<IHeaderMenu>`
   height:40px;
   width:100%;
   display:flex;
-  flex-direction:row;
-  background-color:blue;
-  justify-content:flex-end;
+  flex-direction: row;
+  ${(p) => (p.justifyContent && `justify-content: ${p.justifyContent}`)};
+  ${(p) => (p.backGroundColor && `background-color: ${p.backGroundColor}`)};
 `
 
-const BrandMenu = styled.div`
-  height:40px;
-  width:100%;
-  display:flex;
-  flex-direction:row;
-  background-color:yellow;
-`
-const BrandInfo = styled.div`
-  height:40px;
-  width:100%;
-  display:flex;
-  flex-direction:row;
-  background-color:black;
-`
 
 const HeaderItems = styled.div`
   display:flex;
   flex-direction:row;
   align-items:center;
-  margin-right:15px;
+  margin-right:40px;
 `
 
 const HeaderItem = styled.div`
@@ -54,9 +45,19 @@ const HeaderItem = styled.div`
   align-items:center;
 `
 
+const MenuItem = styled.p`
+  font-size:12px;
+
+  &:hover{
+    cursor: pointer;
+    opacity:0.5;
+  }
+`
+
 const Header: FC = () => {
 
   const [isHelpDrop, setIsHelpDrop] = useState(false);
+  const [isNewRelease, setIsNewRelease] = useState(false);
   // const [isLoading, setIsLoading] = useState(false);
 
   // const handleTest = () => {
@@ -84,16 +85,21 @@ const Header: FC = () => {
   //   </TestisContainer>)
   // })
 
+
   const helpMenu = (<>
-    <NavLink to="/second" >
-      <h1>bangsat menclok</h1>
+    <h3>Help</h3>
+    <NavLink to="/orderstatus" style={{ textDecoration: 'none', color: 'black' }} >
+      <MenuItem>Order Status</MenuItem>
     </NavLink>
-    <h1>bangsat</h1>
-    <h1>bangsat</h1> </>);
+    <MenuItem>Dispatch and Delivery</MenuItem>
+    <MenuItem>Returns</MenuItem>
+    <MenuItem>Size Charts</MenuItem>
+    <MenuItem>Contact Us</MenuItem>
+  </>);
 
   return (<HeaderContainer>
 
-    <BrandHeader >
+    <BrandHeader backGroundColor={'white'} justifyContent={'flex-end'}>
       <HeaderItems>
         <HeaderItem onMouseEnter={() => setIsHelpDrop(true)} onMouseLeave={() => setIsHelpDrop(false)}>Help</HeaderItem>
         <h5>|</h5>
@@ -104,12 +110,17 @@ const Header: FC = () => {
 
 
 
-    <BrandMenu>
-      Halooooooo
-    </BrandMenu>
+    <BrandHeader backGroundColor={'gold'} justifyContent={'space-between'}>
+      <MenuItem onMouseEnter={() => setIsNewRelease(true)}>New release</MenuItem>
+      <MenuItem>Men</MenuItem>
+      <MenuItem>Women</MenuItem>
+      <MenuItem>Kids</MenuItem>
+    </BrandHeader>
+    <DropdownHeaderMenu isActive={isNewRelease} content={(<h1>beraaaaakkkkk</h1>)} />
 
-    <BrandInfo>
-    </BrandInfo>
+
+    <BrandHeader backGroundColor={'silver'}>
+    </BrandHeader>
   </HeaderContainer>
   )
 }

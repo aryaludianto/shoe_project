@@ -5,14 +5,14 @@ import Header from './component/Header/Header'
 
 //this is test
 import Test from './component/test'
-import TestSecond from './component/TestSecond'
+import OrderStatus from './component/HelpComponent/OrderStatus'
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <Route exact path='/' component={Test} />
-      <Route exact path='/second' component={TestSecond} />
+      <Route exact path='/orderstatus' component={OrderStatus} />
     </BrowserRouter>
   );
 }
