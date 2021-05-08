@@ -1,14 +1,14 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
-import axios from 'axios';
-import Loader from "react-loader-spinner";
+// import axios from 'axios';
+// import Loader from "react-loader-spinner";
 import DropdownHeaderMenu from './DropdownMenu'
 import { NavLink } from 'react-router-dom';
+import MenuItem from './MenuItem';
 
 const HeaderContainer = styled.div`
   height: 120px;
   width:100%;
-  background-color:red;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -17,17 +17,17 @@ const HeaderContainer = styled.div`
 interface IHeaderMenu {
   backGroundColor?: string
   justifyContent?: string
+  height?: String
 }
 
 const BrandHeader = styled.div<IHeaderMenu>`
-  height:40px;
   width:100%;
   display:flex;
   flex-direction: row;
   ${(p) => (p.justifyContent && `justify-content: ${p.justifyContent}`)};
   ${(p) => (p.backGroundColor && `background-color: ${p.backGroundColor}`)};
+  ${(p) => (p.height && `height: ${p.height}`)};
 `
-
 
 const HeaderItems = styled.div`
   display:flex;
@@ -45,78 +45,76 @@ const HeaderItem = styled.div`
   align-items:center;
 `
 
-const MenuItem = styled.p`
-  font-size:12px;
+
+const HeaderLogo = styled.h2`
+  margin: auto auto auto 50px;
+  font-family: cursive;
 
   &:hover{
     cursor: pointer;
-    opacity:0.5;
-  }
+  }  
+
 `
 
 const Header: FC = () => {
-
-  const [isHelpDrop, setIsHelpDrop] = useState(false);
-  const [isNewRelease, setIsNewRelease] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-
-  // const handleTest = () => {
-  //   setIsLoading(true)
-  //   axios
-  //     .get('test')
-  //     .then((res: any) => {
-  //       const result: any = []
-  //       for (let i = 0; i < 11; i++) {
-  //         result.push(res.data[i]['city'])
-  //       }
-  //       setTestCall(result);
-  //       setIsLoading(false)
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // }
-
-  // const testButton = (<TestButton onClick={handleTest}>This is test</TestButton>);
-
-  // const testis = testCall.length !== 0 && testCall.map((test: String, index: Number) => {
-  //   return (<TestisContainer key={`testis-${index}`}>
-  //     {test}
-  //   </TestisContainer>)
-  // })
+  const [openMenu, setOpenMenu] = useState("");
 
 
   const helpMenu = (<>
     <h3>Help</h3>
     <NavLink to="/orderstatus" style={{ textDecoration: 'none', color: 'black' }} >
-      <MenuItem>Order Status</MenuItem>
+      <MenuItem height={'15px'} margin={'10px 0'}>Order Status</MenuItem>
     </NavLink>
-    <MenuItem>Dispatch and Delivery</MenuItem>
-    <MenuItem>Returns</MenuItem>
-    <MenuItem>Size Charts</MenuItem>
-    <MenuItem>Contact Us</MenuItem>
+    <MenuItem height={'15px'} margin={'10px 0'}>Dispatch and Delivery</MenuItem>
+    <MenuItem height={'15px'} margin={'10px 0'}>Returns</MenuItem>
+    <MenuItem height={'15px'} margin={'10px 0'}>Contact Us</MenuItem>
   </>);
 
-  return (<HeaderContainer>
+  const newReleaseMenu = (<>
+    <div>
+      <h3>New for Men</h3>
+      <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
+        <MenuItem height={'15px'} margin={'10px 0'}>New Office collection</MenuItem>
+      </NavLink>
+      <MenuItem height={'15px'} margin={'10px 0'}>New Dance collection</MenuItem>
+      <MenuItem height={'15px'} margin={'10px 0'}>New Sport Collection</MenuItem>
+    </div>
+    <div>
+      <h3>New for Women</h3>
+      <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
+        <MenuItem height={'15px'} margin={'10px 0'}>New Office collection</MenuItem>
+      </NavLink>
+      <MenuItem height={'15px'} margin={'10px 0'}>New Dance collection</MenuItem>
+      <MenuItem height={'15px'} margin={'10px 0'}>New Sport Collection</MenuItem>
+    </div>
+  </>)
 
-    <BrandHeader backGroundColor={'white'} justifyContent={'flex-end'}>
+  return (<HeaderContainer>
+    <BrandHeader height={'40px'} backGroundColor={'white'} justifyContent={'flex-end'}>
+      <HeaderLogo>
+        <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} >
+          Golden Shoe
+        </NavLink>
+      </HeaderLogo>
+
       <HeaderItems>
-        <HeaderItem onMouseEnter={() => setIsHelpDrop(true)} onMouseLeave={() => setIsHelpDrop(false)}>Help</HeaderItem>
+        <HeaderItem onMouseEnter={() => setOpenMenu('help')} onMouseLeave={() => setOpenMenu('')}>Help</HeaderItem>
         <h5>|</h5>
         <HeaderItem>Sign In</HeaderItem>
       </HeaderItems>
     </BrandHeader>
-    <DropdownHeaderMenu isActive={isHelpDrop} content={helpMenu} />
+    <DropdownHeaderMenu isActive={openMenu === 'help'} content={helpMenu} />
 
-
-
-    <BrandHeader backGroundColor={'gold'} justifyContent={'space-between'}>
-      <MenuItem onMouseEnter={() => setIsNewRelease(true)}>New release</MenuItem>
-      <MenuItem>Men</MenuItem>
-      <MenuItem>Women</MenuItem>
-      <MenuItem>Kids</MenuItem>
+    <BrandHeader backGroundColor={'gold'} height={'50px'} justifyContent={'center'}>
+      <MenuItem onMouseEnter={() => setOpenMenu('newRelease')} onMouseLeave={() => setOpenMenu('')}>New release</MenuItem>
+      <MenuItem onMouseEnter={() => setOpenMenu('menCategories')} onMouseLeave={() => setOpenMenu('')}>Men</MenuItem>
+      <MenuItem onMouseEnter={() => setOpenMenu('womenCategories')} onMouseLeave={() => setOpenMenu('')}>Women</MenuItem>
+      <MenuItem onMouseEnter={() => setOpenMenu('kidsCategories')} onMouseLeave={() => setOpenMenu('')}>Kids</MenuItem>
     </BrandHeader>
-    <DropdownHeaderMenu isActive={isNewRelease} content={(<h1>beraaaaakkkkk</h1>)} />
+    <DropdownHeaderMenu isActive={openMenu === 'newRelease'} menuType={'big'} content={newReleaseMenu} />
+    <DropdownHeaderMenu isActive={openMenu === 'menCategories'} menuType={'big'} content={(<h1>Men Categories</h1>)} />
+    <DropdownHeaderMenu isActive={openMenu === 'womenCategories'} menuType={'big'} content={(<h1>Women Categories</h1>)} />
+    <DropdownHeaderMenu isActive={openMenu === 'kidsCategories'} menuType={'big'} content={(<h1>Kids Categories</h1>)} />
 
 
     <BrandHeader backGroundColor={'silver'}>

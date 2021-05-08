@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
 import Loader from "react-loader-spinner";
+import dataExample from './constant/dataExample'
 
 const TestContainer = styled.div`
   display: flex;
@@ -53,6 +54,8 @@ const Test: FC = () => {
       {test}
     </TestisContainer>)
   })
+
+  console.log(dataExample)
 
   return (
     <TestContainer>
