@@ -203,7 +203,7 @@ const dataExample = [
     price: 55,
     stock: [
       {
-        color: 'core black/trace grey metallic', size: [{ number: 28, amount: 1 }, { number: 29, amount: 2 }, { number: 30, amount: 1 }],
+        color: 'core black/trace grey metallic', size: [{ number: 28, amount: 0 }, { number: 29, amount: 2 }, { number: 30, amount: 1 }],
         imageUrl: ['https://img01.ztat.net/article/spp-media-p1/2d72e7b5ac863564b4c8fd611a010deb/5786f7baf3a44329a79a788b07e8c32f.jpg?imwidth=1800&filter=packshot',
           'https://img01.ztat.net/article/spp-media-p1/7126d660694c39449d2edc6b3ebf864d/ca397cd6463f42659ea6a20a79796e0b.jpg?imwidth=1800',
           'https://img01.ztat.net/article/spp-media-p1/89b47006fa7431d48d1865ab0b655fb9/ffeea4e564684036b5a9ba2db137ed5e.jpg?imwidth=1800',
@@ -212,7 +212,7 @@ const dataExample = [
           'https://img01.ztat.net/article/spp-media-p1/0e5815fc401e3c9db693897ff765fed2/b9cab04bf2fc4eabac540ec5910d3e94.jpg?imwidth=1800']
       },
       {
-        color: 'footwear white/core black', size: [{ number: 25, amount: 1 }, { number: 26, amount: 2 }, { number: 29, amount: 1 }],
+        color: 'footwear white/core black', size: [{ number: 25, amount: 1 }, { number: 26, amount: 1 }, { number: 29, amount: 1 }, { number: 30, amount: 1 }, { number: 31, amount: 1 }, { number: 32, amount: 1 }],
         imageUrl: ['https://img01.ztat.net/article/spp-media-p1/c45140c61fa73d6a98352a6c8602c043/1a3a4b6eddc6403bbcbc317c2f7a0db7.jpg?imwidth=1800&filter=packshot',
           'https://img01.ztat.net/article/spp-media-p1/316e91f2c76c365eb57857c2bad390cc/5666333b2f664692b5646e9abe7714ad.jpg?imwidth=1800',
           'https://img01.ztat.net/article/spp-media-p1/5e8dcca89fec329db29563444cce2821/d3fa0364d0d34fb4b66d1eb4f9ce74d9.jpg?imwidth=1800',

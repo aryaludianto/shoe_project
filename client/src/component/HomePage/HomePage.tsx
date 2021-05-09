@@ -30,7 +30,7 @@ const ProductBlock = styled.div`
 const HomePage: FC = () => {
 
   const products = dataExample.map((data, index) => {
-    return (<ProductCard key={`product-key:${index}`} product={data} />)
+    return (<ProductCard key={`product-card:${index}`} product={data} />)
   })
 
   return (

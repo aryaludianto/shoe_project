@@ -1,15 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
-// import axios from 'axios';
-// import Loader from "react-loader-spinner";
 import { NavLink } from 'react-router-dom';
 
 const Card = styled.div`
   display: flex;
-  height: 600px;
+  height: 650px;
   width: 400px;
   margin: 10px;
-  /* justify-content:center; */
   flex-direction:column;
 
   &:hover{
@@ -19,7 +16,7 @@ const Card = styled.div`
 `
 
 const ImageContainer = styled.img`
-  height: 450px;
+  height: 500px;
   width: 100%;
   margin-top:0;
 `
@@ -41,27 +38,29 @@ const ProductCard: FC<Properties> = ({
   product
 }) => {
 
-  const [imageColor, setImageColor] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
-    imageColor === "" && setImageColor(product.stock[0].color)
+    selectedImage === "" && setSelectedImage(product.stock[0].color)
+  }, [selectedImage, product])
+
+
+  const ProductImage = product.stock.map((stock: any, index: number) => {
+    if (stock.color === selectedImage)
+      return (<ImageContainer key={`product-image-${index}`} src={stock.imageUrl[0]} alt={`image of ${product.name} color ${stock.color}`} />)
+    else
+      return null
   })
 
-
-  const ProductImage = product.stock.map((stock: any) => {
-    if (stock.color === imageColor)
-      return (<ImageContainer src={stock.imageUrl[0]} alt={`image of ${product.name} color ${stock.color}`} />)
-  })
-
-  const StockColours = product.stock.map((stock: any) => {
-    return (<img onMouseEnter={() => setImageColor(stock.color)} src={stock.imageUrl[0]} alt={`${product.name} ${stock.color}`} style={{ width: '30px', height: '30px', marginRight: '20px' }} />)
+  const StockColours = product.stock.map((stock: any, index: number) => {
+    return (<img key={`color product ${index}`} onMouseEnter={() => setSelectedImage(stock.color)} src={stock.imageUrl[0]} alt={`${product.name} ${stock.color}`} style={{ width: '30px', height: '30px', marginRight: '20px' }} />)
   })
 
   return (
-    <Card>
+    <Card key={`productCard ${product.brand} ${product.name}`}>
       <NavLink key={`${product.brand}`} to={{
         pathname: "/product",
-        state: { product },
+        state: { product, selectedColor: selectedImage },
       }} style={{ textDecoration: 'none', color: 'black' }}>
         {ProductImage}
         <StockColorsContainer>
