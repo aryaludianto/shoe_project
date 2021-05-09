@@ -5,6 +5,9 @@ import styled from 'styled-components'
 import DropdownHeaderMenu from './DropdownMenu'
 import { NavLink } from 'react-router-dom';
 import MenuItem from './MenuItem';
+import useWindowSize from '../constant/useWindowSize'
+import { screenBreakpoints, onDevice } from '../constant/theme'
+import images from '../../img'
 
 const HeaderContainer = styled.div`
   height: 120px;
@@ -12,6 +15,12 @@ const HeaderContainer = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
+  
+  ${onDevice.mobileL}{
+    height: 60px;
+    flex-direction:row;
+    background-color:gold;
+  }
 `
 
 interface IHeaderMenu {
@@ -54,11 +63,30 @@ const HeaderLogo = styled.h2`
     cursor: pointer;
   }  
 
+  ${onDevice.mobileL}{
+    margin-left:20px;
+  }
+`
+
+const BurgerMenu = styled.div`
+  height:40px;
+  width:40px;
+  margin-right: 30px;
+  background-color:gold;
+
+  img{
+    width:100%;
+    height:100%;
+  }
+
+  &:hover{
+    opacity:0.5;
+  }
 `
 
 const Header: FC = () => {
   const [openMenu, setOpenMenu] = useState("");
-
+  const { width } = useWindowSize()
 
   const helpMenu = (<>
     <h3>Help</h3>
@@ -89,37 +117,56 @@ const Header: FC = () => {
     </div>
   </>)
 
-  return (<HeaderContainer>
-    <BrandHeader height={'40px'} backGroundColor={'white'} justifyContent={'flex-end'}>
+  const DesktopHeader = (
+    <>
+      <BrandHeader height={'40px'} backGroundColor={'white'} justifyContent={'flex-end'}>
+        <HeaderLogo>
+          <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} >
+            Golden Shoe
+          </NavLink>
+        </HeaderLogo>
+        <HeaderItems>
+          <HeaderItem onMouseEnter={() => setOpenMenu('help')} onMouseLeave={() => setOpenMenu('')}>Help</HeaderItem>
+          <h5>|</h5>
+          <HeaderItem>Sign In</HeaderItem>
+        </HeaderItems>
+      </BrandHeader>
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'help'} content={helpMenu} />
+      <BrandHeader backGroundColor={'gold'} height={'50px'} justifyContent={'center'}>
+        <MenuItem onMouseEnter={() => setOpenMenu('newRelease')} onMouseLeave={() => setOpenMenu('')}>New release</MenuItem>
+        <MenuItem onMouseEnter={() => setOpenMenu('menCategories')} onMouseLeave={() => setOpenMenu('')}>Men</MenuItem>
+        <MenuItem onMouseEnter={() => setOpenMenu('womenCategories')} onMouseLeave={() => setOpenMenu('')}>Women</MenuItem>
+        <MenuItem onMouseEnter={() => setOpenMenu('kidsCategories')} onMouseLeave={() => setOpenMenu('')}>Kids</MenuItem>
+      </BrandHeader>
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'newRelease'} menuType={'big'} content={newReleaseMenu} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'menCategories'} menuType={'big'} content={(<h1>Men Categories</h1>)} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'womenCategories'} menuType={'big'} content={(<h1>Women Categories</h1>)} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'kidsCategories'} menuType={'big'} content={(<h1>Kids Categories</h1>)} />
+
+
+      <BrandHeader backGroundColor={'silver'}>
+      </BrandHeader>
+    </>)
+
+  const MobileHeader = (
+    <>
       <HeaderLogo>
         <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} >
           Golden Shoe
-        </NavLink>
+          </NavLink>
       </HeaderLogo>
+      <BurgerMenu onClick={() => setOpenMenu('mobileMenu')}>
+        <img src={images.burgerMenu} alt="burger-menu" />
+      </BurgerMenu>
+      <DropdownHeaderMenu isActive={openMenu === 'mobileMenu'} menuType={'mobile'} content={(<h1>Mobile categories</h1>)}
+        setOpenMenu={setOpenMenu} />
+    </>
+  )
 
-      <HeaderItems>
-        <HeaderItem onMouseEnter={() => setOpenMenu('help')} onMouseLeave={() => setOpenMenu('')}>Help</HeaderItem>
-        <h5>|</h5>
-        <HeaderItem>Sign In</HeaderItem>
-      </HeaderItems>
-    </BrandHeader>
-    <DropdownHeaderMenu isActive={openMenu === 'help'} content={helpMenu} />
-
-    <BrandHeader backGroundColor={'gold'} height={'50px'} justifyContent={'center'}>
-      <MenuItem onMouseEnter={() => setOpenMenu('newRelease')} onMouseLeave={() => setOpenMenu('')}>New release</MenuItem>
-      <MenuItem onMouseEnter={() => setOpenMenu('menCategories')} onMouseLeave={() => setOpenMenu('')}>Men</MenuItem>
-      <MenuItem onMouseEnter={() => setOpenMenu('womenCategories')} onMouseLeave={() => setOpenMenu('')}>Women</MenuItem>
-      <MenuItem onMouseEnter={() => setOpenMenu('kidsCategories')} onMouseLeave={() => setOpenMenu('')}>Kids</MenuItem>
-    </BrandHeader>
-    <DropdownHeaderMenu isActive={openMenu === 'newRelease'} menuType={'big'} content={newReleaseMenu} />
-    <DropdownHeaderMenu isActive={openMenu === 'menCategories'} menuType={'big'} content={(<h1>Men Categories</h1>)} />
-    <DropdownHeaderMenu isActive={openMenu === 'womenCategories'} menuType={'big'} content={(<h1>Women Categories</h1>)} />
-    <DropdownHeaderMenu isActive={openMenu === 'kidsCategories'} menuType={'big'} content={(<h1>Kids Categories</h1>)} />
-
-
-    <BrandHeader backGroundColor={'silver'}>
-    </BrandHeader>
-  </HeaderContainer>
+  return (
+    <HeaderContainer>
+      {width > screenBreakpoints.mobileL ? DesktopHeader : MobileHeader}
+    </HeaderContainer>
   )
 }
 

@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
-import axios from 'axios';
-import Loader from "react-loader-spinner";
+// import axios from 'axios';
+// import Loader from "react-loader-spinner";
 import ProductCard from '../Card/ProductCard'
 import Body from '../Body/Body'
 import images from '../../img'
@@ -14,19 +14,6 @@ import dataExample from '../constant/dataExample'
 const { hero1, hero2, hero3, hero_mobile1, hero_mobile2 } = images;
 const heroImages = [hero1, hero2, hero3];
 const heroImagesMobile = [hero_mobile1, hero_mobile2];
-
-// const BodyContainer = styled.div`
-//   display: flex;
-//   flex-direction:column;
-//   width:100%;
-//   margin: 0 20px;
-// `
-// const SortBar = styled.div`
-//   display:flex;
-//   height: 50px;
-//   width:100%;
-//   margin-top:0;
-// `
 
 const ProductBlock = styled.div`
   display:flex;
@@ -60,7 +47,6 @@ const HeroContainer = styled.div<IHeroContainer>`
 `
 
 const HomePage: FC = () => {
-
   const [heroImageIndex, setHeroImageIndex] = useState(Number);
   const { width } = useWindowSize()
 
@@ -88,15 +74,11 @@ const HomePage: FC = () => {
   return (
     <Body>
 
-      {/* <BodyContainer> */}
       {/* <SortBar> This is for sorting </SortBar> */}
-      {/* <Slideshow /> */}
-      {/* <HeroImage /> */}
       <HeroContainer imageLink={heroImageUrl} />
       <ProductBlock>
         {products}
       </ProductBlock>
-      {/* </BodyContainer> */}
     </Body>
   )
 }
