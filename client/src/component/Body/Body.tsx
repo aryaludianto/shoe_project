@@ -5,7 +5,7 @@ const BodyContainer = styled.div`
   display: flex;
   flex-direction:column;
   width:100%;
-  margin: 0 40px;
+  margin: 0 20px;
 `
 
 const Body: FC = ({ children }) => {
