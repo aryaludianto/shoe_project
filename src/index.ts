@@ -22,6 +22,11 @@ app.get('/', (req, res) => {
 // Activity Logger
 app.use(loggerMiddleware);
 
+app.use(express.json());
+
+// Real route
+app.use('/product', router.product);
+
 // Route Testing
 app.use('/test', router.test);
 

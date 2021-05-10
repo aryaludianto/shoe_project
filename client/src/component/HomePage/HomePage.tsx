@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
-// import axios from 'axios';
+import axios from 'axios';
 // import Loader from "react-loader-spinner";
 import ProductCard from '../Card/ProductCard'
 import Body from '../Body/Body'
@@ -9,7 +9,7 @@ import { screenBreakpoints, onDevice } from '../constant/theme'
 import useWindowSize from '../constant/useWindowSize'
 
 //Example data
-import dataExample from '../constant/dataExample'
+// import dataExample from '../constant/dataExample'
 
 const { hero1, hero2, hero3, hero_mobile1, hero_mobile2 } = images;
 const heroImages = [hero1, hero2, hero3];
@@ -48,9 +48,25 @@ const HeroContainer = styled.div<IHeroContainer>`
 
 const HomePage: FC = () => {
   const [heroImageIndex, setHeroImageIndex] = useState(Number);
-  const { width } = useWindowSize()
+  const { width } = useWindowSize();
 
-  const products = dataExample.map((data, index) => {
+  const [productsData, setProductData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true)
+    axios
+      .get('product')
+      .then((res: any) => {
+        setProductData(res.data);
+        setIsLoading(false)
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, [productsData])
+
+  const products = productsData && productsData.map((data, index) => {
     return (<ProductCard key={`product-card:${index}`} product={data} />)
   })
 

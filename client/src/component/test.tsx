@@ -33,13 +33,9 @@ const Test: FC = () => {
   const handleTest = () => {
     setIsLoading(true)
     axios
-      .get('test')
+      .get('product')
       .then((res: any) => {
-        const result: any = []
-        for (let i = 0; i < 11; i++) {
-          result.push(res.data[i]['city'])
-        }
-        setTestCall(result);
+        setTestCall(res.data);
         setIsLoading(false)
       })
       .catch(err => {
@@ -51,11 +47,11 @@ const Test: FC = () => {
 
   const testis = testCall.length !== 0 && testCall.map((test: String, index: Number) => {
     return (<TestisContainer key={`testis-${index}`}>
-      {test}
+      {test.brand}
     </TestisContainer>)
   })
 
-  console.log(dataExample)
+  // console.log(dataExample)
 
   return (
     <TestContainer>

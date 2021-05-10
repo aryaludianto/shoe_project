@@ -22,6 +22,9 @@ app.get('/', function (req, res) {
 });
 // Activity Logger
 app.use(loggerMiddleWare_1.default);
+app.use(express_1.default.json());
+// Real route
+app.use('/product', index_1.default.product);
 // Route Testing
 app.use('/test', index_1.default.test);
 mongoose_1.default.connect(config_1.default.monggoUri, {
