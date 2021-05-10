@@ -4,8 +4,10 @@ import hero3 from './hero_3.png'
 import hero_mobile1 from './mobile_hero1.png'
 import hero_mobile2 from './mobile_hero2.png'
 import burgerMenu from './burger_menu.png'
+import shoppingCart from './cart.svg'
+import searchIcon from './search_icon.svg'
+import profileIcon from './profileIcon.svg'
 
-
-const images = { hero1, hero2, hero3, hero_mobile1, hero_mobile2, burgerMenu }
+const images = { hero1, hero2, hero3, hero_mobile1, hero_mobile2, burgerMenu, shoppingCart, searchIcon, profileIcon }
 
 export default images

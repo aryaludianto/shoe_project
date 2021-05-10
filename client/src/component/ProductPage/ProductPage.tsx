@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useLocation } from 'react-router-dom';
 import Body from '../Body/Body'
 import DropDownSize from './DropDownSize';
-
+import { screenBreakpoints, onDevice } from '../constant/theme'
 import deliveryImage from '../../img/delivery.png'
 import leftCurveArrow from '../../img/left_curve_arrow.png'
 //Example data
@@ -35,15 +35,13 @@ display:grid;
 grid-template-columns: 1fr 1fr;
 height:100%;
 width:100%;
-`
 
-const ImageContainer = styled.div`
-display:flex;
-flex-direction:row;
-/* background-color:yellow; */
-width:100%;
-/* height:100vh; */
-margin:20px;
+${onDevice.mobileL}{
+  display:flex;
+  flex-direction:column;
+  /* padding: 0 10px; */
+}
+
 `
 
 interface IListImages {
@@ -51,17 +49,45 @@ interface IListImages {
 }
 
 const ListImages = styled.div <IListImages>`
-display:flex;
-flex-direction: ${(p) => p.direction};
+  display:flex;
+  flex-direction: ${(p) => p.direction};
 `
 
+const ImageContainer = styled.div`
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  margin:20px;
+  
+  ${onDevice.mobileL}{
+    margin:0;
+  }
+
+  ${onDevice.mobileS}{
+    ${ListImages}{
+      display:none;
+    }
+    
+    height:600px;
+    width:100%;
+  }
+`
+
+
+
 const ProductDetailsContainer = styled.div`
-display:flex;
-flex-direction:column;
-width:400px;
-height:100%;
-margin:20px;
-margin-left:100px;
+  display:flex;
+  flex-direction:column;
+  width: 400px;
+  height:100%;
+  margin:20px;
+  margin-left:100px;
+  
+  ${onDevice.mobileL}{
+    width:94%;
+    margin:10px;
+    /* margin:0; */
+  }
 
 `
 
@@ -132,9 +158,6 @@ const BuyButton = styled.button`
   }
 `
 
-
-
-
 interface Properties {
   test: any
 }
@@ -190,11 +213,9 @@ const ProductPage: FC<Properties> = () => {
           </ListImages>
           {imageBig}
         </ImageContainer>
-
         <ProductDetailsContainer>
           <h1>{product.brand}</h1>
           <h2>{product.name}</h2>
-
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <h3>£ {product.price}</h3>
             <p style={{ marginLeft: '5px ' }}> including VAT</p>
@@ -202,11 +223,9 @@ const ProductPage: FC<Properties> = () => {
           <div>
             <p>Color: {selectedColorProduct}</p>
           </div>
-
           <ListImages direction={'row'}>
             {colorsList}
           </ListImages>
-
           <BuyButtonContainer>
             <DropDownSize selectedSize={selectedSize} setSelectedSize={setSelectedSize} stock={sizeList} isOpen={openSizeDropDown} setIsOpen={setOpenSizeDropDown} />
             <BuyButton onClick={() => handleBuyButton()}>
@@ -221,12 +240,8 @@ const ProductPage: FC<Properties> = () => {
                 <p style={{ marginLeft: '20px', fontSize: '15px', fontWeight: 600 }}>100 days Return rights</p>
               </div>
             </DeliveryInfo>
-
           </BuyButtonContainer>
-
         </ProductDetailsContainer>
-
-
       </BodyContainer>
     </Body>
   )

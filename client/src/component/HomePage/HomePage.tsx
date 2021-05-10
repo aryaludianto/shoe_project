@@ -55,7 +55,6 @@ const HomePage: FC = () => {
   })
 
   const limit = width > screenBreakpoints.mobileS ? 2 : 1;
-
   let counter = 0;
 
   useEffect(() => {

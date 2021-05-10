@@ -6,7 +6,7 @@ const dataExample = [
     name: 'Suede Oxford',
     category: 'adult',
     gender: 'men',
-    type: 'office',
+    type: 'business',
     price: 100,
     stock: [
       {
@@ -70,7 +70,7 @@ const dataExample = [
     name: 'Elegant',
     category: 'adult',
     gender: 'women',
-    type: 'office',
+    type: 'business',
     price: 100,
     stock: [
       {
@@ -172,7 +172,7 @@ const dataExample = [
     name: 'Oxford Leather',
     category: 'kids',
     gender: 'boy',
-    type: 'casual',
+    type: 'business',
     price: 45,
     stock: [
       {

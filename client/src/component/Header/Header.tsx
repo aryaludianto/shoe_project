@@ -64,15 +64,15 @@ const HeaderLogo = styled.h2`
   }  
 
   ${onDevice.mobileL}{
-    margin-left:20px;
+    margin-left:10px;
   }
 `
 
-const BurgerMenu = styled.div`
-  height:40px;
-  width:40px;
-  margin-right: 30px;
-  background-color:gold;
+const MobileButton = styled.div`
+  height:30px;
+  width:30px;
+  margin-right: 20px;
+  margin-left:10px;
 
   img{
     width:100%;
@@ -126,6 +126,14 @@ const Header: FC = () => {
           </NavLink>
         </HeaderLogo>
         <HeaderItems>
+          <HeaderItem>
+            <img style={{ height: '20px', width: '30px' }} src={images.profileIcon} alt="profile" onClick={() => console.log('profile')} />
+          </HeaderItem>
+          <h5>|</h5>
+          <HeaderItem>
+            <img style={{ height: '20px', width: '30px' }} src={images.shoppingCart} alt="shopping-cart" />
+          </HeaderItem>
+          <h5>|</h5>
           <HeaderItem onMouseEnter={() => setOpenMenu('help')} onMouseLeave={() => setOpenMenu('')}>Help</HeaderItem>
           <h5>|</h5>
           <HeaderItem>Sign In</HeaderItem>
@@ -153,12 +161,20 @@ const Header: FC = () => {
       <HeaderLogo>
         <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} >
           Golden Shoe
-          </NavLink>
+        </NavLink>
       </HeaderLogo>
-      <BurgerMenu onClick={() => setOpenMenu('mobileMenu')}>
+      <MobileButton>
+        <img src={images.profileIcon} alt="profile" onClick={() => setOpenMenu('profileMenu')} />
+      </MobileButton>
+      <MobileButton>
+        <img src={images.shoppingCart} alt="shopping-cart" />
+      </MobileButton>
+      <MobileButton onClick={() => setOpenMenu('mobileMenu')}>
         <img src={images.burgerMenu} alt="burger-menu" />
-      </BurgerMenu>
-      <DropdownHeaderMenu isActive={openMenu === 'mobileMenu'} menuType={'mobile'} content={(<h1>Mobile categories</h1>)}
+      </MobileButton>
+      <DropdownHeaderMenu isActive={openMenu === 'mobileMenu'} menuType={'mobile'} content={(<h1>Mobile Menu categories</h1>)}
+        setOpenMenu={setOpenMenu} />
+      <DropdownHeaderMenu isActive={openMenu === 'profileMenu'} menuType={'mobile'} content={(<h1>Profile Menu</h1>)}
         setOpenMenu={setOpenMenu} />
     </>
   )
