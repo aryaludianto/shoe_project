@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
+import { screenBreakpoints, onDevice } from '../constant/theme'
 
 const Card = styled.div`
   display: flex;
@@ -12,6 +13,12 @@ const Card = styled.div`
   &:hover{
     cursor: pointer;
     background: rgb(245, 245, 245) none repeat scroll 0% 0%;
+  }
+
+  ${onDevice.mobileL}{
+    width:100%;
+    height: 650px;
+
   }
 `
 
