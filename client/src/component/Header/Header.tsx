@@ -19,7 +19,7 @@ const HeaderContainer = styled.div`
   ${onDevice.mobileL}{
     height: 60px;
     flex-direction:row;
-    background-color:gold;
+    background-color:#7F7F7F;
   }
 `
 
@@ -84,6 +84,15 @@ const MobileButton = styled.div`
   }
 `
 
+const DesktopMenuList = styled.div`
+  display:flex;
+  flex-direction:row;
+  /* justify-content:space-around; */
+  align-items:center;
+  height:100%;
+  width:100%;
+`
+
 const Header: FC = () => {
   const [openMenu, setOpenMenu] = useState("");
   const { width } = useWindowSize()
@@ -98,25 +107,39 @@ const Header: FC = () => {
     <MenuItem height={'15px'} margin={'10px 0'}>Contact Us</MenuItem>
   </>);
 
-  const newReleaseMenu = (<>
-    <div>
-      <h3>New for Men</h3>
-      <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
-        <MenuItem height={'15px'} margin={'10px 0'}>New Office collection</MenuItem>
-      </NavLink>
-      <MenuItem height={'15px'} margin={'10px 0'}>New Dance collection</MenuItem>
-      <MenuItem height={'15px'} margin={'10px 0'}>New Sport Collection</MenuItem>
-    </div>
-    <div>
-      <h3>New for Women</h3>
-      <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
-        <MenuItem height={'15px'} margin={'10px 0'}>New Office collection</MenuItem>
-      </NavLink>
-      <MenuItem height={'15px'} margin={'10px 0'}>New Dance collection</MenuItem>
-      <MenuItem height={'15px'} margin={'10px 0'}>New Sport Collection</MenuItem>
-    </div>
-  </>)
+  const newReleaseMenu = (
+    <DesktopMenuList>
+      <div style={{ margin: 'auto 20px auto auto' }}>
+        <h3>New for Men</h3>
+        <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
+          <MenuItem height={'15px'} margin={'10px 0'}>New Business collection</MenuItem>
+        </NavLink>
+        <MenuItem height={'15px'} margin={'10px 0'}>New Casual collection</MenuItem>
+      </div>
 
+      <div style={{ margin: 'auto auto auto 20px' }}>
+        <h3>New for Women</h3>
+        <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
+          <MenuItem height={'15px'} margin={'10px 0'}>New Business collection</MenuItem>
+        </NavLink>
+        <MenuItem height={'15px'} margin={'10px 0'}>New Casual collection</MenuItem>
+      </div>
+    </DesktopMenuList>)
+
+
+
+  const genderMenu = (gender: string) => {
+    return (
+      <DesktopMenuList>
+        <div style={{ margin: 'auto' }}>
+          <h3>{gender} Categories</h3>
+          <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
+            <MenuItem height={'15px'} margin={'10px 0'}>{gender} Business collection</MenuItem>
+          </NavLink>
+          <MenuItem height={'15px'} margin={'10px 0'}>{gender} Casual collection</MenuItem>
+        </div>
+      </DesktopMenuList>)
+  }
   const DesktopHeader = (
     <>
       <BrandHeader height={'40px'} backGroundColor={'white'} justifyContent={'flex-end'}>
@@ -140,16 +163,14 @@ const Header: FC = () => {
         </HeaderItems>
       </BrandHeader>
       <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'help'} content={helpMenu} />
-      <BrandHeader backGroundColor={'gold'} height={'50px'} justifyContent={'center'}>
-        <MenuItem onMouseEnter={() => setOpenMenu('newRelease')} onMouseLeave={() => setOpenMenu('')}>New release</MenuItem>
+      <BrandHeader backGroundColor={'#DBDBDB'} height={'50px'} justifyContent={'center'}>
         <MenuItem onMouseEnter={() => setOpenMenu('menCategories')} onMouseLeave={() => setOpenMenu('')}>Men</MenuItem>
         <MenuItem onMouseEnter={() => setOpenMenu('womenCategories')} onMouseLeave={() => setOpenMenu('')}>Women</MenuItem>
         <MenuItem onMouseEnter={() => setOpenMenu('kidsCategories')} onMouseLeave={() => setOpenMenu('')}>Kids</MenuItem>
       </BrandHeader>
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'newRelease'} menuType={'big'} content={newReleaseMenu} />
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'menCategories'} menuType={'big'} content={(<h1>Men Categories</h1>)} />
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'womenCategories'} menuType={'big'} content={(<h1>Women Categories</h1>)} />
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'kidsCategories'} menuType={'big'} content={(<h1>Kids Categories</h1>)} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'menCategories'} menuType={'big'} content={genderMenu('Men')} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'womenCategories'} menuType={'big'} content={genderMenu('Women')} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'kidsCategories'} menuType={'big'} content={genderMenu('Kids')} />
 
 
       <BrandHeader backGroundColor={'silver'}>

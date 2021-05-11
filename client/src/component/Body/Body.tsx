@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import { screenBreakpoints, onDevice } from '../constant/theme'
+import { onDevice } from '../constant/theme'
 
 const BodyContainer = styled.div`
   display: flex;

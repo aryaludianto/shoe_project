@@ -1,7 +1,9 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
-import { screenBreakpoints, onDevice } from '../constant/theme'
+import { onDevice } from '../constant/theme'
+import IProduct from '../../redux/interfaces/Product';
+
 
 const Card = styled.div`
   display: flex;
@@ -37,8 +39,8 @@ const StockColorsContainer = styled.div`
 `
 
 interface Properties {
-  brand?: String
-  product: { name: String, brand: String, type: String, gender: String, stock: any, category: String }
+  brand?: string
+  product: IProduct
 }
 
 const ProductCard: FC<Properties> = ({

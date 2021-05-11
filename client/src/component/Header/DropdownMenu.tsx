@@ -85,7 +85,6 @@ const DropdownHeaderMenu: FC<Properties> = ({
       onMouseLeave={() => setIsActiveOnTop(false)} isActiveOnTop={isActiveOnTop}
       isActive={isActive} menuType={menuType}>
       {width <= screenBreakpoints.mobileL && MobileButton}
-
       {content}
     </NavbarDropdownContent>
   )

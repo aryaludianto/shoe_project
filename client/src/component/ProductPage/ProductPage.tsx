@@ -1,47 +1,24 @@
-import React, { FC, useState, useEffect } from 'react'
-// import { useParams } from 'react-roouter-dom'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom';
 import Body from '../Body/Body'
 import DropDownSize from './DropDownSize';
-import { screenBreakpoints, onDevice } from '../constant/theme'
+import { onDevice } from '../constant/theme'
 import deliveryImage from '../../img/delivery.png'
 import leftCurveArrow from '../../img/left_curve_arrow.png'
-//Example data
-import dataExample from '../constant/dataExample'
+import IProduct from '../../redux/interfaces/Product'
 
-// const BodyContainer = styled.div`
-//   display: flex;
-//   flex-direction:column;
-//   width:100%;
-// `
-// const SortBar = styled.div`
-//   display:flex;
-//   height: 50px;
-//   width:100%;
-//   margin-top:0;
-// `
-
-// const ProductBlock = styled.div`
-//   display:flex;
-//   flex-direction: row;
-//   flex-wrap:wrap;
-//   margin:50px auto;
-//   justify-content:center;
-// `
 
 const BodyContainer = styled.div`
-display:grid;
-grid-template-columns: 1fr 1fr;
+display:flex;
+flex-direction:row;
 height:100%;
 width:100%;
 
 ${onDevice.mobileL}{
   display:flex;
   flex-direction:column;
-  /* padding: 0 10px; */
 }
-
 `
 
 interface IListImages {
@@ -56,7 +33,7 @@ const ListImages = styled.div <IListImages>`
 const ImageContainer = styled.div`
   display:flex;
   flex-direction:row;
-  width:100%;
+  width:50%;
   margin:20px;
   
   ${onDevice.mobileL}{
@@ -73,8 +50,6 @@ const ImageContainer = styled.div`
   }
 `
 
-
-
 const ProductDetailsContainer = styled.div`
   display:flex;
   flex-direction:column;
@@ -86,7 +61,6 @@ const ProductDetailsContainer = styled.div`
   ${onDevice.mobileL}{
     width:94%;
     margin:10px;
-    /* margin:0; */
   }
 
 `
@@ -96,11 +70,6 @@ height: 80%;
 width: 100%;
 margin: 5px;
 transition: transform .2s;
-
-/* &:hover{
-  transform: scale(1.5);
-} */
-
 `
 
 interface IImageSmall {
@@ -158,16 +127,13 @@ const BuyButton = styled.button`
   }
 `
 
-interface Properties {
-  test: any
-}
 
 interface LocationState {
-  product: any
+  product: IProduct
   selectedColor: string
 }
 
-const ProductPage: FC<Properties> = () => {
+const ProductPage: FC = () => {
 
   const product = useLocation<LocationState>().state.product;
   const selectedColor = useLocation<LocationState>().state.selectedColor;
@@ -189,7 +155,7 @@ const ProductPage: FC<Properties> = () => {
       setOpenSizeDropDown(true)
   }
 
-  const imageList = selectedColorImageList.imageUrl.map((productImage: any, index: Number) => {
+  const imageList = selectedColorImageList.imageUrl.map((productImage: string, index: number) => {
     return (
       <ImageSmall key={`list-image-${index}`} isSelected={productImage === selectedImageProduct} src={productImage} onClick={() => setSelectedImageProduct(productImage)} alt={`ProductImage${index}`} />
     )

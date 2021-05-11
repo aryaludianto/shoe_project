@@ -7,9 +7,10 @@ import Body from '../Body/Body'
 import images from '../../img'
 import { screenBreakpoints, onDevice } from '../constant/theme'
 import useWindowSize from '../constant/useWindowSize'
-
-//Example data
-// import dataExample from '../constant/dataExample'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../redux/effects/Products';
+import { AppState } from '../../redux/store';
+import ScreenLoader from '../Loader/Loader'
 
 const { hero1, hero2, hero3, hero_mobile1, hero_mobile2 } = images;
 const heroImages = [hero1, hero2, hero3];
@@ -24,7 +25,7 @@ const ProductBlock = styled.div`
 `
 
 interface IHeroContainer {
-  imageLink: any
+  imageLink: string
 }
 
 const HeroContainer = styled.div<IHeroContainer>`
@@ -43,28 +44,49 @@ const HeroContainer = styled.div<IHeroContainer>`
   ${onDevice.mobileS}{
     height: 100vh;
   }
-
 `
 
 const HomePage: FC = () => {
   const [heroImageIndex, setHeroImageIndex] = useState(Number);
   const { width } = useWindowSize();
 
-  const [productsData, setProductData] = useState([]);
+  // const [productsData, setProductData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setIsLoading(true)
-    axios
-      .get('product')
-      .then((res: any) => {
-        setProductData(res.data);
-        setIsLoading(false)
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }, [productsData])
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  const newProducts = useSelector((state: AppState) => state.products);
+  // newProducts.products && setProductData(newProducts.products);
+  // console.log(newProducts.products  );
+
+  const productsData = newProducts.products
+
+  // useEffect(()=>{
+  //   newProducts && setProductData(newProducts);
+  // },[productsData])
+
+  //test redux
+  // const productsReducer = createStore(reducer);
+
+
+
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   axios
+  //     .get('product')
+  //     .then((res: any) => {
+  //       setProductData(res.data);
+  //       setIsLoading(false)
+
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // }, [productsData])
 
   const products = productsData && productsData.map((data, index) => {
     return (<ProductCard key={`product-card:${index}`} product={data} />)
@@ -86,16 +108,15 @@ const HomePage: FC = () => {
 
   const heroImageUrl = width > screenBreakpoints.mobileS ? heroImages[heroImageIndex] : heroImagesMobile[heroImageIndex];
 
-  return (
-    <Body>
+  const Page = productsData ? (<Body>
+    {/* <SortBar> This is for sorting </SortBar> */}
+    <HeroContainer imageLink={heroImageUrl} />
+    <ProductBlock>
+      {products}
+    </ProductBlock>
+  </Body>) : (<ScreenLoader />)
 
-      {/* <SortBar> This is for sorting </SortBar> */}
-      <HeroContainer imageLink={heroImageUrl} />
-      <ProductBlock>
-        {products}
-      </ProductBlock>
-    </Body>
-  )
+  return Page;
 }
 
 export default HomePage

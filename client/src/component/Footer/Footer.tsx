@@ -9,11 +9,10 @@ const FooterContainer = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
-  background-color:gold;
+  background-color:#7F7F7F;
 `
 
 const Footer: FC = () => {
-
 
   return (<FooterContainer>
     <h1>Halooooooo</h1>
