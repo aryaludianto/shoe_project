@@ -1,7 +1,5 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
-// import axios from 'axios';
-// import Loader from "react-loader-spinner";
 import DropdownHeaderMenu from './DropdownMenu'
 import { NavLink } from 'react-router-dom';
 import MenuItem from './MenuItem';
@@ -87,7 +85,6 @@ const MobileButton = styled.div`
 const DesktopMenuList = styled.div`
   display:flex;
   flex-direction:row;
-  /* justify-content:space-around; */
   align-items:center;
   height:100%;
   width:100%;
@@ -107,36 +104,23 @@ const Header: FC = () => {
     <MenuItem height={'15px'} margin={'10px 0'}>Contact Us</MenuItem>
   </>);
 
-  const newReleaseMenu = (
-    <DesktopMenuList>
-      <div style={{ margin: 'auto 20px auto auto' }}>
-        <h3>New for Men</h3>
-        <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
-          <MenuItem height={'15px'} margin={'10px 0'}>New Business collection</MenuItem>
-        </NavLink>
-        <MenuItem height={'15px'} margin={'10px 0'}>New Casual collection</MenuItem>
-      </div>
-
-      <div style={{ margin: 'auto auto auto 20px' }}>
-        <h3>New for Women</h3>
-        <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
-          <MenuItem height={'15px'} margin={'10px 0'}>New Business collection</MenuItem>
-        </NavLink>
-        <MenuItem height={'15px'} margin={'10px 0'}>New Casual collection</MenuItem>
-      </div>
-    </DesktopMenuList>)
-
-
-
-  const genderMenu = (gender: string) => {
+  const categoryMenu = (category: string) => {
     return (
       <DesktopMenuList>
         <div style={{ margin: 'auto' }}>
-          <h3>{gender} Categories</h3>
-          <NavLink to="/newReleaseMen" style={{ textDecoration: 'none', color: 'black' }} >
-            <MenuItem height={'15px'} margin={'10px 0'}>{gender} Business collection</MenuItem>
+          <h3>{category} Categories</h3>
+          <NavLink key={`${category}-business`} to={{
+            pathname: "/sorted",
+            state: { category, type: 'business' },
+          }} style={{ textDecoration: 'none', color: 'black' }}>
+            <MenuItem height={'15px'} margin={'10px 0'}>{category} Business collection</MenuItem>
           </NavLink>
-          <MenuItem height={'15px'} margin={'10px 0'}>{gender} Casual collection</MenuItem>
+          <NavLink key={`${category}-casual`} to={{
+            pathname: "/sorted",
+            state: { category, type: 'casual' },
+          }} style={{ textDecoration: 'none', color: 'black' }}>
+            <MenuItem height={'15px'} margin={'10px 0'}>{category} Casual collection</MenuItem>
+          </NavLink>
         </div>
       </DesktopMenuList>)
   }
@@ -168,11 +152,9 @@ const Header: FC = () => {
         <MenuItem onMouseEnter={() => setOpenMenu('womenCategories')} onMouseLeave={() => setOpenMenu('')}>Women</MenuItem>
         <MenuItem onMouseEnter={() => setOpenMenu('kidsCategories')} onMouseLeave={() => setOpenMenu('')}>Kids</MenuItem>
       </BrandHeader>
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'menCategories'} menuType={'big'} content={genderMenu('Men')} />
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'womenCategories'} menuType={'big'} content={genderMenu('Women')} />
-      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'kidsCategories'} menuType={'big'} content={genderMenu('Kids')} />
-
-
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'menCategories'} menuType={'big'} content={categoryMenu('Men')} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'womenCategories'} menuType={'big'} content={categoryMenu('Women')} />
+      <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'kidsCategories'} menuType={'big'} content={categoryMenu('Kids')} />
       <BrandHeader backGroundColor={'silver'}>
       </BrandHeader>
     </>)

@@ -1,7 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
-import axios from 'axios';
-// import Loader from "react-loader-spinner";
 import ProductCard from '../Card/ProductCard'
 import Body from '../Body/Body'
 import images from '../../img'
@@ -16,7 +14,7 @@ const { hero1, hero2, hero3, hero_mobile1, hero_mobile2 } = images;
 const heroImages = [hero1, hero2, hero3];
 const heroImagesMobile = [hero_mobile1, hero_mobile2];
 
-const ProductBlock = styled.div`
+export const ProductBlock = styled.div`
   display:flex;
   flex-direction: row;
   flex-wrap:wrap;
@@ -49,10 +47,6 @@ const HeroContainer = styled.div<IHeroContainer>`
 const HomePage: FC = () => {
   const [heroImageIndex, setHeroImageIndex] = useState(Number);
   const { width } = useWindowSize();
-
-  // const [productsData, setProductData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,33 +54,7 @@ const HomePage: FC = () => {
   }, [dispatch]);
 
   const newProducts = useSelector((state: AppState) => state.products);
-  // newProducts.products && setProductData(newProducts.products);
-  // console.log(newProducts.products  );
-
   const productsData = newProducts.products
-
-  // useEffect(()=>{
-  //   newProducts && setProductData(newProducts);
-  // },[productsData])
-
-  //test redux
-  // const productsReducer = createStore(reducer);
-
-
-
-  // useEffect(() => {
-  //   setIsLoading(true)
-  //   axios
-  //     .get('product')
-  //     .then((res: any) => {
-  //       setProductData(res.data);
-  //       setIsLoading(false)
-
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // }, [productsData])
 
   const products = productsData && productsData.map((data, index) => {
     return (<ProductCard key={`product-card:${index}`} product={data} />)

@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import { onDevice } from '../constant/theme'
 import Loader from "react-loader-spinner";
-
 
 const LoaderContainer = styled.div`
   width:100vw;
@@ -12,13 +10,6 @@ const LoaderContainer = styled.div`
   align-items:center;
   justify-content:center;
   background-color:#7F7F7F;
-
-  
-  ${onDevice.mobileL}{
-  }
-
-  ${onDevice.mobileS}{
-  }
 `
 
 const ScreenLoader: FC = () => {
