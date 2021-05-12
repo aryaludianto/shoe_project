@@ -2,8 +2,8 @@ export default interface IProduct {
   brand: { type: string };
   name: { type: string };
   category: { type: string };
-  gender: { type: string };
-  type: { type: string };
+  gender: { type: string; toLowerCase: () => string };
+  type: { type: string; toLowerCase: () => string };
   price: { type: number };
   stock: [
     {

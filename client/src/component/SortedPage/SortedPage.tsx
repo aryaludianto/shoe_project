@@ -12,37 +12,24 @@ import { getProducts } from '../../redux/effects/Products';
 
 
 interface LocationState {
-  category: String
-  type: string
+  category: { type: string, toLowerCase: () => string }
+  type: { type: string, toLowerCase: () => string }
+
 }
 
 const SortedPage: FC = () => {
   const dispatch = useDispatch();
-  const category = useLocation<LocationState>().state.category.toLowerCase();
-  const type: string = useLocation<LocationState>().state.type;
+  const category = useLocation<LocationState>().state.category;
+  const type = useLocation<LocationState>().state.type;
   const products = useSelector((state: AppState) => state.products).products;
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  //TODO: why filter is not working
-  // const sortedProducts = products && products.map(product =>{ 
-  //   if(product.gender == category){
-
-  //   return (<ProductCard key={`product-card:${index}`} product={data} />)
-
-  //   }
-  // });
-
-  console.log({ category, type, products })
-
-  const sortedProducts = products
-    .map((data, index) => {
-      return (<ProductCard key={`product-card:${index}`} product={data} />)
-    })
-
-
+  const sortedProducts = products && products.filter(product => ((product.gender.toLowerCase() === category.toLowerCase()) && (product.type.toLowerCase() === type.toLowerCase()))).map((data, index) => {
+    return (<ProductCard key={`product-card:${index}`} product={data} />)
+  });
 
   return (
     <ProductBlock>
