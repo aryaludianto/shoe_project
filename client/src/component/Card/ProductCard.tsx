@@ -18,9 +18,12 @@ const Card = styled.div`
   }
 
   ${onDevice.mobileL}{
+    width: 350px;
+  }
+
+  ${onDevice.mobileS}{
     width:100%;
     height: 650px;
-
   }
 `
 
