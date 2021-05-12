@@ -82,31 +82,49 @@ const MobileButton = styled.div`
   }
 `
 
-const DesktopMenuList = styled.div`
+const MenuList = styled.div`
   display:flex;
   flex-direction:row;
   align-items:center;
   height:100%;
   width:100%;
+  
+  ${onDevice.mobileL}{
+    margin-left:0;
+    div{
+      margin-left:0;
+    }
+  }
+`
+
+const HelpMenu = styled.div`
+ ${onDevice.mobileL}{
+   h3{
+     display:flex;
+     justify-content:center;
+   }
+  }
 `
 
 const Header: FC = () => {
   const [openMenu, setOpenMenu] = useState("");
   const { width } = useWindowSize()
 
-  const helpMenu = (<>
-    <h3>Help</h3>
-    <NavLink to="/orderstatus" style={{ textDecoration: 'none', color: 'black' }} >
-      <MenuItem height={'15px'} margin={'10px 0'}>Order Status</MenuItem>
-    </NavLink>
-    <MenuItem height={'15px'} margin={'10px 0'}>Dispatch and Delivery</MenuItem>
-    <MenuItem height={'15px'} margin={'10px 0'}>Returns</MenuItem>
-    <MenuItem height={'15px'} margin={'10px 0'}>Contact Us</MenuItem>
-  </>);
+  const helpMenu = (
+    <HelpMenu>
+      <h3>Help</h3>
+      <NavLink to="/underConstruction" style={{ textDecoration: 'none', color: 'black' }} >
+        <MenuItem height={'15px'} margin={'10px 0'}>Order Status</MenuItem>
+        <MenuItem height={'15px'} margin={'10px 0'}>Dispatch and Delivery</MenuItem>
+        <MenuItem height={'15px'} margin={'10px 0'}>Returns</MenuItem>
+        <MenuItem height={'15px'} margin={'10px 0'}>Contact Us</MenuItem>
+      </NavLink>
+    </HelpMenu>
+  );
 
   const categoryMenu = (category: string) => {
     return (
-      <DesktopMenuList>
+      <MenuList>
         <div style={{ margin: 'auto' }}>
           <h3>{category} Categories</h3>
           <NavLink key={`${category}-business`} to={{
@@ -122,7 +140,7 @@ const Header: FC = () => {
             <MenuItem height={'15px'} margin={'10px 0'}>{category} Casual collection</MenuItem>
           </NavLink>
         </div>
-      </DesktopMenuList>)
+      </MenuList>)
   }
   const DesktopHeader = (
     <>
@@ -134,11 +152,15 @@ const Header: FC = () => {
         </HeaderLogo>
         <HeaderItems>
           <HeaderItem>
-            <img style={{ height: '20px', width: '30px' }} src={images.profileIcon} alt="profile" onClick={() => console.log('profile')} />
+            <NavLink to="/underConstruction" style={{ textDecoration: 'none', color: 'black' }} >
+              <img style={{ height: '20px', width: '30px' }} src={images.profileIcon} alt="profile" onClick={() => console.log('profile')} />
+            </NavLink>
           </HeaderItem>
           <h5>|</h5>
           <HeaderItem>
-            <img style={{ height: '20px', width: '30px' }} src={images.shoppingCart} alt="shopping-cart" />
+            <NavLink to="/underConstruction" style={{ textDecoration: 'none', color: 'black' }} >
+              <img style={{ height: '20px', width: '30px' }} src={images.shoppingCart} alt="shopping-cart" />
+            </NavLink>
           </HeaderItem>
           <h5>|</h5>
           <HeaderItem onMouseEnter={() => setOpenMenu('help')} onMouseLeave={() => setOpenMenu('')}>Help</HeaderItem>
@@ -175,7 +197,13 @@ const Header: FC = () => {
       <MobileButton onClick={() => setOpenMenu('mobileMenu')}>
         <img src={images.burgerMenu} alt="burger-menu" />
       </MobileButton>
-      <DropdownHeaderMenu isActive={openMenu === 'mobileMenu'} menuType={'mobile'} content={(<h1>Mobile Menu categories</h1>)}
+      <DropdownHeaderMenu isActive={openMenu === 'mobileMenu'} menuType={'mobile'} content={(
+        <div onClick={() => setOpenMenu('')}>
+          {categoryMenu('Men')}
+          {categoryMenu('Women')}
+          {categoryMenu('Kids')}
+          {helpMenu}
+        </div>)}
         setOpenMenu={setOpenMenu} />
       <DropdownHeaderMenu isActive={openMenu === 'profileMenu'} menuType={'mobile'} content={(<h1>Profile Menu</h1>)}
         setOpenMenu={setOpenMenu} />

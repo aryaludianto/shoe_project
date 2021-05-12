@@ -17,6 +17,16 @@ interface LocationState {
 
 }
 
+const PageTitle = styled.h1`
+  display:flex;
+  justify-content:center;
+  
+  ${onDevice.mobileL}{
+    font-size: 20px;
+    margin-top: 25px;
+  }
+`
+
 const SortedPage: FC = () => {
   const dispatch = useDispatch();
   const category = useLocation<LocationState>().state.category;
@@ -32,9 +42,13 @@ const SortedPage: FC = () => {
   });
 
   return (
-    <ProductBlock>
-      {sortedProducts}
-    </ProductBlock>);
+    <Body>
+      <PageTitle>{category} {type} Collection</PageTitle>
+      <ProductBlock>
+        {sortedProducts}
+      </ProductBlock>
+    </Body>
+  );
 }
 
 export default SortedPage

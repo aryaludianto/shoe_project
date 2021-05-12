@@ -127,7 +127,6 @@ const BuyButton = styled.button`
   }
 `
 
-
 interface LocationState {
   product: IProduct
   selectedColor: string

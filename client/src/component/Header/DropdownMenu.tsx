@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import useWindowSize from '../constant/useWindowSize'
 import { screenBreakpoints, onDevice } from '../constant/theme'
+import images from '../../img'
+
 
 export interface IDropDown {
   isActive: Boolean
@@ -56,6 +58,15 @@ const NavbarDropdownContent = styled.div<IDropDown>`
   `}
 `;
 
+const MobileButtonContainer = styled.div`
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  margin: 0 20px;
+  height:50px;
+  width:100%;
+`
+
 export interface Properties {
   content?: React.ReactNode
   menuType?: string
@@ -77,14 +88,19 @@ const DropdownHeaderMenu: FC<Properties> = ({
     setOpenMenu('')
   }
 
-  const MobileButton = (<div style={{ height: '10px', width: '10px', cursor: 'pointer', margin: '10px 10px' }}
-    onClick={() => handleCloseMobileMenu()}>close menu</div >)
+  const MobileButton = (<div style={{ height: '20px', width: '20px', cursor: 'pointer', margin: 'auto 40px auto' }}
+    onClick={() => handleCloseMobileMenu()}><img src={images.mobileCloseButton} alt={'mobile close button'} /></div >)
+
+  const MobileMenuHeader = (<MobileButtonContainer>
+    <h2>Golden Shoe</h2>
+    {MobileButton}
+  </MobileButtonContainer>)
 
   return (
     <NavbarDropdownContent onMouseEnter={() => setIsActiveOnTop(true)}
       onMouseLeave={() => setIsActiveOnTop(false)} isActiveOnTop={isActiveOnTop}
       isActive={isActive} menuType={menuType}>
-      {width <= screenBreakpoints.mobileL && MobileButton}
+      {width <= screenBreakpoints.mobileL && MobileMenuHeader}
       {content}
     </NavbarDropdownContent>
   )

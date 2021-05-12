@@ -7,6 +7,7 @@ import HomePage from './component/HomePage/HomePage'
 import ProductPage from './component/ProductPage/ProductPage'
 import SortedPage from './component/SortedPage/SortedPage'
 import OrderStatus from './component/HelpComponent/OrderStatus'
+import UnderConstruction from './component/UnderConstruction/UnderConstruction'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route exact path='/orderstatus' component={OrderStatus} />
       <Route exact path='/product' component={ProductPage} />
       <Route exact path='/sorted' component={SortedPage} />
+      <Route exact path='/underConstruction' component={UnderConstruction} />
       <Footer />
     </BrowserRouter>
   );

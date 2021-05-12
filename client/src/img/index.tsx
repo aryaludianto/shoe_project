@@ -7,7 +7,8 @@ import burgerMenu from './burger_menu.png'
 import shoppingCart from './cart.svg'
 import searchIcon from './search_icon.svg'
 import profileIcon from './profileIcon.svg'
+import mobileCloseButton from './closeButton.svg'
 
-const images = { hero1, hero2, hero3, hero_mobile1, hero_mobile2, burgerMenu, shoppingCart, searchIcon, profileIcon }
+const images = { hero1, hero2, hero3, hero_mobile1, hero_mobile2, burgerMenu, shoppingCart, searchIcon, profileIcon, mobileCloseButton }
 
 export default images

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { onDevice } from '../constant/theme'
 
 interface IMenuItem {
   height?: String
@@ -19,6 +20,11 @@ const Item = styled.p<IMenuItem>`
   &:hover{
     cursor: pointer;
     opacity:0.5;
+  }
+
+  ${onDevice.mobileL}{
+    display:flex;
+    justify-content:center;
   }
 `
 
