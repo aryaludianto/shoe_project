@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import useWindowSize from '../constant/useWindowSize'
-import { screenBreakpoints, onDevice } from '../constant/theme'
+import { screenBreakpoints } from '../constant/theme'
 import images from '../../img'
-
+import { NavLink } from 'react-router-dom';
 
 export interface IDropDown {
   isActive: Boolean
@@ -92,7 +92,9 @@ const DropdownHeaderMenu: FC<Properties> = ({
     onClick={() => handleCloseMobileMenu()}><img src={images.mobileCloseButton} alt={'mobile close button'} /></div >)
 
   const MobileMenuHeader = (<MobileButtonContainer>
-    <h2>Golden Shoe</h2>
+    <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} onClick={() => handleCloseMobileMenu()}>
+      <h2>Golden Shoe</h2>
+    </NavLink>
     {MobileButton}
   </MobileButtonContainer>)
 

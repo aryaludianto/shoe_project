@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-
 interface IBodyContainer {
   isOpen: boolean
 }
@@ -65,7 +64,6 @@ const ListSize = styled.div<IList>`
     background-color: light gray;
   `}
 `
-
 
 interface Properties {
   stock: any

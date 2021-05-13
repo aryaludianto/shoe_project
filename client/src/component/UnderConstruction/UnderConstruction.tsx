@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Body from '../Body/Body'
 import { onDevice } from '../constant/theme'
 
-
 const NotificationContainer = styled.div`
   height:90vh;
   display:flex;

@@ -52,7 +52,6 @@ const HeaderItem = styled.div`
   align-items:center;
 `
 
-
 const HeaderLogo = styled.h2`
   margin: auto auto auto 50px;
   font-family: cursive;
@@ -113,8 +112,10 @@ const Header: FC = () => {
   const helpMenu = (
     <HelpMenu>
       <h3>Help</h3>
-      <NavLink to="/underConstruction" style={{ textDecoration: 'none', color: 'black' }} >
+      <NavLink to="/orderStatus" style={{ textDecoration: 'none', color: 'black' }} >
         <MenuItem height={'15px'} margin={'10px 0'}>Order Status</MenuItem>
+      </NavLink>
+      <NavLink to="/underConstruction" style={{ textDecoration: 'none', color: 'black' }} >
         <MenuItem height={'15px'} margin={'10px 0'}>Dispatch and Delivery</MenuItem>
         <MenuItem height={'15px'} margin={'10px 0'}>Returns</MenuItem>
         <MenuItem height={'15px'} margin={'10px 0'}>Contact Us</MenuItem>
@@ -144,7 +145,7 @@ const Header: FC = () => {
   }
   const DesktopHeader = (
     <>
-      <BrandHeader height={'40px'} backGroundColor={'white'} justifyContent={'flex-end'}>
+      <BrandHeader height={'40px'} backGroundColor={'#DBDBDB'} justifyContent={'flex-end'}>
         <HeaderLogo>
           <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} >
             Golden Shoe
@@ -170,6 +171,9 @@ const Header: FC = () => {
       </BrandHeader>
       <DropdownHeaderMenu setOpenMenu={() => console.log('press menu')} isActive={openMenu === 'help'} content={helpMenu} />
       <BrandHeader backGroundColor={'#DBDBDB'} height={'50px'} justifyContent={'center'}>
+        <NavLink to="/" style={{ textDecoration: 'none', color: 'black' }} >
+          <MenuItem>Welcome</MenuItem>
+        </NavLink>
         <MenuItem onMouseEnter={() => setOpenMenu('menCategories')} onMouseLeave={() => setOpenMenu('')}>Men</MenuItem>
         <MenuItem onMouseEnter={() => setOpenMenu('womenCategories')} onMouseLeave={() => setOpenMenu('')}>Women</MenuItem>
         <MenuItem onMouseEnter={() => setOpenMenu('kidsCategories')} onMouseLeave={() => setOpenMenu('')}>Kids</MenuItem>

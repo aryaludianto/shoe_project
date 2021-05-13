@@ -8,7 +8,11 @@ import shoppingCart from './cart.svg'
 import searchIcon from './search_icon.svg'
 import profileIcon from './profileIcon.svg'
 import mobileCloseButton from './closeButton.svg'
+import chatIcon from './chat.svg'
+import phoneIcon from './phone.svg'
+import emailIcon from './emailIcon.svg'
+import goldenShoeLogo from './GoldenShoeLogo.png'
 
-const images = { hero1, hero2, hero3, hero_mobile1, hero_mobile2, burgerMenu, shoppingCart, searchIcon, profileIcon, mobileCloseButton }
+const images = { hero1, hero2, hero3, hero_mobile1, hero_mobile2, burgerMenu, shoppingCart, searchIcon, profileIcon, mobileCloseButton, chatIcon, phoneIcon, emailIcon, goldenShoeLogo }
 
 export default images

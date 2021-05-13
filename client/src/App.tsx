@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './component/Header/Header'
@@ -15,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Route exact path='/' component={HomePage} />
-      <Route exact path='/orderstatus' component={OrderStatus} />
+      <Route exact path='/orderStatus' component={OrderStatus} />
       <Route exact path='/product' component={ProductPage} />
       <Route exact path='/sorted' component={SortedPage} />
       <Route exact path='/underConstruction' component={UnderConstruction} />

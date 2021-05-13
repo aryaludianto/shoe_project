@@ -77,7 +77,6 @@ const HomePage: FC = () => {
   const heroImageUrl = width > screenBreakpoints.mobileS ? heroImages[heroImageIndex] : heroImagesMobile[heroImageIndex];
 
   const Page = productsData ? (<Body>
-    {/* <SortBar> This is for sorting </SortBar> */}
     <HeroContainer imageLink={heroImageUrl} />
     <ProductBlock>
       {products}

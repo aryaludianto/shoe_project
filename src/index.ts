@@ -27,9 +27,6 @@ app.use(express.json());
 // Real route
 app.use('/product', router.product);
 
-// Route Testing
-app.use('/test', router.test);
-
 mongoose.connect(config.monggoUri, {
   useCreateIndex: true,
   useUnifiedTopology: true,

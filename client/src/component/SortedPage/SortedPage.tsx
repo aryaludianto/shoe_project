@@ -1,15 +1,14 @@
 /* eslint-disable eqeqeq */
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import styled from 'styled-components'
 import Body from '../Body/Body'
-import { screenBreakpoints, onDevice } from '../constant/theme'
+import { onDevice } from '../constant/theme'
 import { AppState } from '../../redux/store';
 import { ProductBlock } from '../HomePage/HomePage'
 import ProductCard from '../Card/ProductCard'
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/effects/Products';
-
 
 interface LocationState {
   category: { type: string, toLowerCase: () => string }

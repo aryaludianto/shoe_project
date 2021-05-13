@@ -8,7 +8,6 @@ import deliveryImage from '../../img/delivery.png'
 import leftCurveArrow from '../../img/left_curve_arrow.png'
 import IProduct from '../../redux/interfaces/Product'
 
-
 const BodyContainer = styled.div`
 display:flex;
 flex-direction:row;
@@ -107,7 +106,7 @@ const DeliveryInfo = styled.div`
   border: 1px solid gray;
 `
 
-const BuyButton = styled.button`
+export const Button = styled.button`
   display:flex;
   width:100%;
   margin-top:20px;
@@ -165,9 +164,7 @@ const ProductPage: FC = () => {
   })
 
   const imageBig = (<MainImage src={selectedImageProduct} alt={`ProductImage${product.stock[0].imageUrl[0]}`} />)
-
   const sizeList = product.stock.filter((stock: any) => stock.color === selectedColorProduct)[0].size;
-
 
   return (
     <Body>
@@ -193,9 +190,9 @@ const ProductPage: FC = () => {
           </ListImages>
           <BuyButtonContainer>
             <DropDownSize selectedSize={selectedSize} setSelectedSize={setSelectedSize} stock={sizeList} isOpen={openSizeDropDown} setIsOpen={setOpenSizeDropDown} />
-            <BuyButton onClick={() => handleBuyButton()}>
+            <Button onClick={() => handleBuyButton()}>
               Buy Now
-            </BuyButton>
+            </Button>
             <DeliveryInfo>
               <img src={deliveryImage} alt={'delivery'} style={{ height: '30px', width: '30px', backgroundColor: 'white', margin: '20px auto 10px 20px' }} />
               <p style={{ marginLeft: '20px', fontSize: '15px', fontWeight: 600 }}>1-4 Working days</p>
