@@ -22,8 +22,10 @@ app.get('/', (req, res) => {
 // Activity Logger
 app.use(loggerMiddleware);
 
-// Route Testing
-app.use('/test', router.test);
+app.use(express.json());
+
+// Real route
+app.use('/product', router.product);
 
 mongoose.connect(config.monggoUri, {
   useCreateIndex: true,

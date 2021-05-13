@@ -1,29 +1,24 @@
-// import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Test from './component/test'
+import Header from './component/Header/Header'
+import Footer from './component/Footer/Footer'
+import HomePage from './component/HomePage/HomePage'
+import ProductPage from './component/ProductPage/ProductPage'
+import SortedPage from './component/SortedPage/SortedPage'
+import OrderStatus from './component/HelpComponent/OrderStatus'
+import UnderConstruction from './component/UnderConstruction/UnderConstruction'
+
 
 function App() {
   return (
     <BrowserRouter>
-      <Route exact path='/' component={Test} />
-
-      {/* <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
-        </header>
-      </div> */}
+      <Header />
+      <Route exact path='/' component={HomePage} />
+      <Route exact path='/orderStatus' component={OrderStatus} />
+      <Route exact path='/product' component={ProductPage} />
+      <Route exact path='/sorted' component={SortedPage} />
+      <Route exact path='/underConstruction' component={UnderConstruction} />
+      <Footer />
     </BrowserRouter>
   );
 }
