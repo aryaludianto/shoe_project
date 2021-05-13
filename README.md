@@ -1,6 +1,6 @@
 # Golden shoe project
 
-## What this project about
+## What this project is about
 
 Fullstack Project For Golden Shoe E-commerce website,
 
