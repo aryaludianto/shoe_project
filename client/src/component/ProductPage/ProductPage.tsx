@@ -37,6 +37,8 @@ const ImageContainer = styled.div`
   
   ${onDevice.mobileL}{
     margin:0;
+    width:100%;
+
   }
 
   ${onDevice.mobileS}{
