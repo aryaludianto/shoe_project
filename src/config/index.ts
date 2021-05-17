@@ -3,8 +3,14 @@ import process from 'process';
 
 dotenv.config();
 // process.env.SERVER_PORT ??
+
+const port =
+  process.env.NODE_ENV === 'development'
+    ? process.env.SERVER_PORT
+    : process.env.PORT;
+
 export default {
   appName: process.env.APP_NAME,
-  port: process.env.PORT,
+  port,
   monggoUri: process.env.MONGGO_DB_URI,
 };

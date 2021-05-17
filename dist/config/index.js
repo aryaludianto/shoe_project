@@ -7,9 +7,12 @@ var dotenv_1 = __importDefault(require("dotenv"));
 var process_1 = __importDefault(require("process"));
 dotenv_1.default.config();
 // process.env.SERVER_PORT ??
+var port = process_1.default.env.NODE_ENV === 'development'
+    ? process_1.default.env.SERVER_PORT
+    : process_1.default.env.PORT;
 exports.default = {
     appName: process_1.default.env.APP_NAME,
-    port: process_1.default.env.PORT,
+    port: port,
     monggoUri: process_1.default.env.MONGGO_DB_URI,
 };
 //# sourceMappingURL=index.js.map
