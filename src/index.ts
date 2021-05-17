@@ -9,16 +9,6 @@ import loggerMiddleware from './logger/loggerMiddleWare';
 const port = process.env.PORT || config.port;
 const app = express();
 
-// // Configure Express to use EJS
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
-
-// // define a route handler for the default Admin home page
-// app.get('/', (req, res) => {
-//   // render the index template
-//   res.render('index');
-// });
-
 // Front-end
 app.use(express.static('client'));
 

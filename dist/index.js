@@ -12,14 +12,6 @@ var index_1 = __importDefault(require("./routes/index"));
 var loggerMiddleWare_1 = __importDefault(require("./logger/loggerMiddleWare"));
 var port = process.env.PORT || config_1.default.port;
 var app = express_1.default();
-// // Configure Express to use EJS
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
-// // define a route handler for the default Admin home page
-// app.get('/', (req, res) => {
-//   // render the index template
-//   res.render('index');
-// });
 // Front-end
 app.use(express_1.default.static('client'));
 // Activity Logger
