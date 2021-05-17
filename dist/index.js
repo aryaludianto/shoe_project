@@ -13,13 +13,13 @@ var loggerMiddleWare_1 = __importDefault(require("./logger/loggerMiddleWare"));
 var port = config_1.default.port;
 var app = express_1.default();
 // Configure Express to use EJS
-app.set('views', path_1.default.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-// define a route handler for the default Admin home page
-app.get('/admin', function (req, res) {
-    // render the index template
-    res.render('index');
-});
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+// // define a route handler for the default Admin home page
+// app.get('/admin', (req, res) => {
+//   // render the index template
+//   res.render('index');
+// });
 // Activity Logger
 app.use(loggerMiddleWare_1.default);
 app.use(express_1.default.json());
