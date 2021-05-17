@@ -19,6 +19,14 @@ app.get('/admin', (req, res) => {
   res.render('index');
 });
 
+// Activity Logger
+app.use(loggerMiddleware);
+
+app.use(express.json());
+
+// Real route
+app.use('/product', router.product);
+
 if (process.env.NODE_ENV === 'production') {
   // set static folder
   app.use(express.static('client/build'));
@@ -27,14 +35,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
-// Activity Logger
-app.use(loggerMiddleware);
-
-app.use(express.json());
-
-// Real route
-app.use('/product', router.product);
 
 mongoose.connect(config.monggoUri, {
   useCreateIndex: true,

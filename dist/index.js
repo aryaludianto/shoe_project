@@ -20,6 +20,11 @@ app.get('/admin', function (req, res) {
     // render the index template
     res.render('index');
 });
+// Activity Logger
+app.use(loggerMiddleWare_1.default);
+app.use(express_1.default.json());
+// Real route
+app.use('/product', index_1.default.product);
 if (process.env.NODE_ENV === 'production') {
     // set static folder
     app.use(express_1.default.static('client/build'));
@@ -27,11 +32,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
-// Activity Logger
-app.use(loggerMiddleWare_1.default);
-app.use(express_1.default.json());
-// Real route
-app.use('/product', index_1.default.product);
 mongoose_1.default.connect(config_1.default.monggoUri, {
     useCreateIndex: true,
     useUnifiedTopology: true,
