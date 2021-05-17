@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
 var process_1 = __importDefault(require("process"));
 dotenv_1.default.config();
-// process.env.SERVER_PORT ??
 var port = process_1.default.env.NODE_ENV === 'development'
     ? process_1.default.env.SERVER_PORT
     : process_1.default.env.PORT;

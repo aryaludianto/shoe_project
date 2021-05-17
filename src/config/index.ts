@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 import process from 'process';
 
 dotenv.config();
-// process.env.SERVER_PORT ??
 
 const port =
   process.env.NODE_ENV === 'development'
