@@ -28,7 +28,7 @@ app.use('/product', index_1.default.product);
 if (process.env.NODE_ENV === 'production') {
     // set static folder
     app.use(express_1.default.static('client/build'));
-    app.get('*', function (req, res) {
+    app.get('/', function (req, res) {
         res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
