@@ -12,26 +12,28 @@ var index_1 = __importDefault(require("./routes/index"));
 var loggerMiddleWare_1 = __importDefault(require("./logger/loggerMiddleWare"));
 var port = process.env.PORT || config_1.default.port;
 var app = express_1.default();
-// Configure Express to use EJS
-app.set('views', path_1.default.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-// define a route handler for the default Admin home page
-app.get('/admin', function (req, res) {
-    // render the index template
-    res.render('index');
-});
+// // Configure Express to use EJS
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+// // define a route handler for the default Admin home page
+// app.get('/admin', (req, res) => {
+//   // render the index template
+//   res.render('index');
+// });
+// Front-end
+app.use(express_1.default.static('client'));
 // Activity Logger
 app.use(loggerMiddleWare_1.default);
 app.use(express_1.default.json());
 // Real route
 app.use('/product', index_1.default.product);
-// if (process.env.NODE_ENV === 'production') {
-//   // set static folder
-//   app.use(express.static('client/build'));
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//   });
-// }
+if (process.env.NODE_ENV === 'production') {
+    // set static folder
+    app.use(express_1.default.static('client/build'));
+    app.get('*', function (req, res) {
+        res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 mongoose_1.default.connect(config_1.default.monggoUri, {
     useCreateIndex: true,
     useUnifiedTopology: true,

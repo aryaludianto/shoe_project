@@ -9,15 +9,18 @@ import loggerMiddleware from './logger/loggerMiddleWare';
 const port = process.env.PORT || config.port;
 const app = express();
 
-// Configure Express to use EJS
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// // Configure Express to use EJS
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
-// define a route handler for the default Admin home page
-app.get('/admin', (req, res) => {
-  // render the index template
-  res.render('index');
-});
+// // define a route handler for the default Admin home page
+// app.get('/admin', (req, res) => {
+//   // render the index template
+//   res.render('index');
+// });
+
+// Front-end
+app.use(express.static('client'));
 
 // Activity Logger
 app.use(loggerMiddleware);
@@ -27,14 +30,14 @@ app.use(express.json());
 // Real route
 app.use('/product', router.product);
 
-// if (process.env.NODE_ENV === 'production') {
-//   // set static folder
-//   app.use(express.static('client/build'));
+if (process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(express.static('client/build'));
 
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//   });
-// }
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 mongoose.connect(config.monggoUri, {
   useCreateIndex: true,
