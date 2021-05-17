@@ -16,7 +16,7 @@ var app = express_1.default();
 app.set('views', path_1.default.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // define a route handler for the default Admin home page
-app.get('/', function (req, res) {
+app.get('/admin', function (req, res) {
     // render the index template
     res.render('index');
 });
