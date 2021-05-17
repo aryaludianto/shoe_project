@@ -10,7 +10,7 @@ var config_1 = __importDefault(require("./config"));
 var mongoose_1 = __importDefault(require("mongoose"));
 var index_1 = __importDefault(require("./routes/index"));
 var loggerMiddleWare_1 = __importDefault(require("./logger/loggerMiddleWare"));
-var port = process.env.PORT || config_1.default.port;
+var port = config_1.default.port;
 var app = express_1.default();
 // Front-end
 app.use(express_1.default.static('client'));

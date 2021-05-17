@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import router from './routes/index';
 import loggerMiddleware from './logger/loggerMiddleWare';
 
-const port = process.env.PORT || config.port;
+const port = config.port;
 const app = express();
 
 // Front-end
