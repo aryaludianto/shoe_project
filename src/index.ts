@@ -3,7 +3,7 @@ import path from 'path';
 import logger from './logger/logger';
 import config from './config';
 import mongoose from 'mongoose';
-import router from './routes/index';
+import ProductRouter from './routes/product';
 import loggerMiddleware from './logger/loggerMiddleWare';
 
 const port = config.port;
@@ -18,7 +18,7 @@ app.use(loggerMiddleware);
 app.use(express.json());
 
 // Real route
-app.use('/product', router.product);
+app.use('/product', ProductRouter);
 
 if (process.env.NODE_ENV === 'production') {
   // set static folder
